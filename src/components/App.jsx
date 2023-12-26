@@ -43,7 +43,6 @@ export function App () {
                 webformatURL,
                 largeImageURL
             }));
-
             if (page !== 1) {
                 if (res.total && res.hits.length !== 0) {
                     setImgArray(prevArray => [...prevArray, ...makeArr]);  
