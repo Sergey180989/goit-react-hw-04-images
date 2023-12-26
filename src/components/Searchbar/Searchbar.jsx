@@ -1,42 +1,32 @@
-import { Component } from 'react';
-import s from "../Searchbar/Searchbar.module.css";
-import PropTypes from 'prop-types';
+import { useState } from 'react';
+import s from '../Searchbar/Searchbar.module.css';
 
-export class Searchbar extends Component {
-    state = {
-      value:""
-  };
-  static propTypes = {
-    onSubmit:PropTypes.func
-  }
-    inputHandler = (e) => {
-        this.setState({ value: e.target.value })
+export function Searchbar ({onSubmit}) {
+     const [value, setValue] = useState("");  
+    const inputHandler = (e) => {
+      setValue(e.target.value);
     };
-    submitHandler = (e) => {
+    const submitHandler = (e) => {
       e.preventDefault();
-      if (this.state.value.trim() === "") {
+      if (value.trim() === "") {
         alert("Write something")
         return
-      }
-        this.props.onSubmit(this.state.value);        
-        this.reset()
+      };
+        onSubmit(value);        
+      setValue("");
     };
-    reset() {
-        this.setState({ value: "" });
-    };
-  render() {
-    return (
+     return (
       <header className={s.searchbar}>
         <form className={s.form}>
-          <button type="submit" className={s.button} onClick={this.submitHandler}>
+          <button type="submit" className={s.button} onClick={submitHandler}>
             <span className={s.buttonLabel}>Search</span>
           </button>
 
           <input
             className={s.input}
                     type="text"
-                    value={this.state.value}
-                    onChange={this.inputHandler}
+                    value={value}
+                    onChange={inputHandler}
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
@@ -44,5 +34,4 @@ export class Searchbar extends Component {
         </form>
       </header>
     );
-  }
-}
+};
