@@ -33,9 +33,7 @@ export function App () {
   
   useEffect(() => {
     if (!imgName) return;
-
     setStatus('pending');
-
     findImage(imgName, page)
         .then(res => {
             const makeArr = res.hits.map(({ id, webformatURL, largeImageURL }) => ({
@@ -43,27 +41,26 @@ export function App () {
                 webformatURL,
                 largeImageURL
             }));
-            if (page !== 1) {
-                if (res.total && res.hits.length !== 0) {
-                    setImgArray(prevArray => [...prevArray, ...makeArr]);  
+           
+               
+                    setImgArray(prevArray => [...prevArray, ...makeArr]);
                     setStatus("resolved");
-                } else {
-                    setStatus('resolveWithoutButton');
-                }
-            } else {
-                setImgArray(makeArr);
-                setStatus('resolved');
-            }
+               
+          
+               
+             
         })
         .catch(err => {
             setError(err.message);
             setStatus('rejected');
         });
-}, [imgName, page, setImgArray]);   
+}, [imgName, page ]);
   const submitHandler = value => {
     setImgName(value);
-    setPage(1);      
+    setPage(1);
+setImgArray([])
   };
+  
   const handleButton = () => {    
     setStatus('pending');    
     setPage(page + 1);         
