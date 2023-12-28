@@ -6,6 +6,7 @@ import { Loader } from './Loader/Loader';
 import { Modal } from './Modal/Modal';
 import s from '../components/App.module.css';
 
+
 const findImage = (imgName, page) => {
     const API_KEY = '25728701-c83c0487db4f1d7b899af3be5';
   const API_GET = 'https://pixabay.com/api/?';   
